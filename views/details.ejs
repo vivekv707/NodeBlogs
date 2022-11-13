@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/head.ejs')%>
+<body class="container-fluid">
+    <%- include('./partials/nav.ejs')%>
+    
+    <!-- Uncomment to see use of static image file -->
+    <!-- <img src="/indep.webp"> -->
+    <h1>Blog Details</h1>
+    <div>
+        <h2><%=blog.title %></h2>
+        <p><%=blog.blogContent %></p>
+        <button class="btn btn-primary" id="delete" data-doc="<%=blog._id%>">Delete blog</button>
+        <img src="">
+    </div>
+    <%- include('./partials/footer.ejs')%>
+    <script>
+        const trashcan = document.getElementById('delete');
+        trashcan.addEventListener('click',(e)=>{
+            const endpoint = `/blogs/${trashcan.dataset.doc}`;
+            fetch(endpoint,{
+                method:'DELETE'
+            }).then((response)=>{response.json().then((data)=>window.location.href=data.redirect).catch(err=>console.log(err))}).catch((err)=>{
+                console.log(err);
+            })
+        })
+
+    </script>
+</body>
+</html>
