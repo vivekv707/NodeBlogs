@@ -1,7 +1,7 @@
 const express = require('express')
 const morgan = require('morgan')
 const mongoose = require('mongoose')
-
+const PORT = process.env.PORT||3030
 const BlogRoutes = require('./routes/blogRoutes')
 const app = express()
 
@@ -9,7 +9,7 @@ const app = express()
 const dbURI = 'mongodb+srv://vivuser:kzFK33TBJ0KOtzyD@cluster0.ayr0cua.mongodb.net/notes-node?retryWrites=true&w=majority'
 mongoose.connect(dbURI).then((result)=>{
     console.log('connected to db')
-    app.listen(3000)
+    app.listen(PORT)
 }).catch((err)=>console.log('Error connecting to db',err))
 //register view engine (ejs)
 app.set('view engine','ejs')
